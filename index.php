@@ -1,31 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link
-        href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-        rel="stylesheet" />
+    <title>Biblioteca</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 </head>
-
 <body>
-    <main class="p-6 max-w-6xl mx-auto">
-        <h1 class="text-2xl font-bold mb-6">Biblioteca</h1>
+    <?php
+        include_once 'pedaco.php';
+    ?>
 
-        <div class="flex gap-4">
-            <a href="listar.php" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-                Acervo
-            </a>
+    <div class="d-grid gap-2 d-md-block" style = "text-align: center; margin-top: 5%">
+        <a href="listar.php" type="button" class="btn btn-secondary">Acervo </a>
+        <a href="form_cadastro.php" type="button" class="btn btn-secondary">Cadastrar Livro </a>
+    </div>
 
-            <a href="form_cadastro.php" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">
-                Inserir Livro
-            </a>
-        </div>
-
-    </main>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </body>
-
 </html>

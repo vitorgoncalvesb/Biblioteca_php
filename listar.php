@@ -1,61 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Acervo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
 </head>
 
 <body>
-    <?php
-    include_once 'pedaco.php'
-    ?>
-    <main class="p-6 max-w-6xl mx-auto">
-        <h2 class="text-2xl font-bold mb-6">Lista de livros disponíveis</h2>
+    <?php include_once 'pedaco.php'; ?>
 
-        <div class="overflow-x-auto">
-            <table class="min-w-full bg-white border border-gray-200 text-sm">
-                <thead class="bg-gray-100 text-gray-700">
-                    <tr>
-                        <th class="px-4 py-3 text-left font-medium border-b">ID</th>
-                        <th class="px-4 py-3 text-left font-medium border-b">Título</th>
-                        <th class="px-4 py-3 text-left font-medium border-b">Gênero</th>
-                        <th class="px-4 py-3 text-left font-medium border-b">Autor</th>
-                        <th class="px-4 py-3 text-left font-medium border-b">Ano</th>
-                        <th class="px-4 py-3 text-left font-medium border-b">Páginas</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-4 py-3 border-b">1</td>
-                        <td class="px-4 py-3 border-b">Dom Casmurro</td>
-                        <td class="px-4 py-3 border-b">Romance</td>
-                        <td class="px-4 py-3 border-b">Machado de Assis</td>
-                        <td class="px-4 py-3 border-b">1899</td>
-                        <td class="px-4 py-3 border-b">256</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-4 py-3 border-b">2</td>
-                        <td class="px-4 py-3 border-b">O Cortiço</td>
-                        <td class="px-4 py-3 border-b">Naturalismo</td>
-                        <td class="px-4 py-3 border-b">Aluísio Azevedo</td>
-                        <td class="px-4 py-3 border-b">1890</td>
-                        <td class="px-4 py-3 border-b">320</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="flex gap-4 mt-5 ml-5">
-            <a href="index.php" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-                Voltar
-            </a>
+    <h2 class="text-center my-4">Lista de livros disponíveis</h2>
 
-            <a href="form_cadastro.php" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">
-                Cadastrar livro
-            </a>
+    <div class="container">
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Gênero</th>
+                    <th scope="col">Autor</th>
+                    <th scope="col">Ano</th>
+                    <th scope="col">Páginas</th>
+                    <th scope="col">Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                require_once 'conexao.php';
+                $sql = "SELECT * FROM livros";
+                $stmt = $pdo->query($sql);
+
+                while ($livro = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    echo "<tr>";
+                    echo "<th scope='row'>" . htmlspecialchars($livro['id']) . "</th>";
+                    echo "<td>" . htmlspecialchars($livro['titulo']) . "</td>";
+                    echo "<td>" . htmlspecialchars($livro['genero']) . "</td>";
+                    echo "<td>" . htmlspecialchars($livro['autor']) . "</td>";
+                    echo "<td>" . htmlspecialchars($livro['ano']) . "</td>";
+                    echo "<td>" . htmlspecialchars($livro['paginas']) . "</td>";
+                    echo
+                        "<td>
+                        <div class='btn-group' role='group'>
+                            <a href='form_atualizar.php?id=" . htmlspecialchars($livro['id']) . "' class='btn btn-primary'>Atualizar</a>
+                            <a href='excluir.php?id=" . htmlspecialchars($livro['id']) . "' class='btn btn-danger' onclick=\"return confirm('Tem certeza que deseja excluir este livro?');\">Excluir</a>
+                        </div>
+                        </td>";
+                    echo "</tr>";
+
+                }
+                ?>
+            </tbody>
+        </table>
+
+        <div class="d-grid gap-2 d-md-block my-3">
+            <a href="index.php" class="btn btn-secondary">Voltar</a>
+            <a href="form_cadastro.php" class="btn btn-secondary">Cadastrar Livro</a>
         </div>
-        <main class="p-6 max-w-6xl mx-auto">
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
